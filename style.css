@@ -1,0 +1,99 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas{
+  border: 2px solid black;
+  border: solid #f79533;
+  border-radius: 2em;
+  border-width: 0.2cm;
+  -webkit-animation: border_gradient 5s ease alternate infinite;
+}
+
+#title{
+  font-family: 'Duru Sans';
+  font-weight: 900; 
+  font-size: 60px;
+  background: linear-gradient(270deg, #f3951a, #0fae5b, #0c85a1, #4586ff);
+  background-size: 800% 800%;
+  -webkit-animation: Gradient 10s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#name_input{
+  border-radius: 35px;
+  border: 0.7mm solid rgb(0, 183, 255);
+  font-family: 'Quicksand';
+  width: 9cm;
+  height: 0.8cm;
+  font-size: 20px;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+#name_input:focus{
+  border-color:rgb(121, 218, 153);
+  transition: all 0.5s ease-in-out;
+  outline: none;
+  transform: scale(1.1);
+}
+
+#submit{
+  color: white;
+  font-family: 'Quicksand';
+  font-weight: 500; 
+  font-size: 17px;
+  border-radius: 1.5em;
+  border: none;
+  width: 3.7cm;
+  height: 0.8cm;
+  background: linear-gradient(to right, #67b26b, #4ca2cb);
+  text-align: center;
+  transition: all 0.4s;
+  cursor: pointer;
+  outline: none;
+}
+#submit:hover{
+  transform: scale(1.1);
+  outline: none;
+}
+
+#info{
+  font-family: 'Quicksand';
+  font-weight: 900; 
+  font-size: 30px;
+  text-align: center;
+  color: rgb(0, 150, 196);
+  -webkit-animation: fadein 6s;
+}
+
+@-webkit-keyframes Gradient{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+@-webkit-keyframes border_gradient {
+  0%{border: solid #f37055;border-width: 0.2cm;}
+  10%{border: solid #ef4e7b;border-width: 0.2cm;}
+  20%{border: solid #a166ab;border-width: 0.2cm;}
+  30%{border: solid #5073b8;border-width: 0.2cm;}
+  40%{border: solid #1098ad;border-width: 0.2cm;}
+  50%{border: solid #07b39b;border-width: 0.2cm;}
+  60%{border: solid #6fba82;border-width: 0.2cm;}
+}
+
+@-webkit-keyframes border_gradient_button {
+  0%{border: solid #f37055;border-width: 0.7mm;}
+  10%{border: solid #ef4e7b;border-width: 0.7mm;}
+  20%{border: solid #a166ab;border-width: 0.7mm;}
+  30%{border: solid #5073b8;border-width: 0.7mm;}
+  40%{border: solid #1098ad;border-width: 0.7mm;}
+  50%{border: solid #07b39b;border-width: 0.7mm;}
+  60%{border: solid #6fba82;border-width: 0.7mm;}
+}
+
+@-webkit-keyframes fadein {
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
