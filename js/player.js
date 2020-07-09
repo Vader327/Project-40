@@ -2,8 +2,8 @@ class Player{
     constructor(){
         this.index = null;
         this.name = null;
-        this.distance = 0;
         this.rank = null;
+        this.distance = 0;
     }
     getCount(){
         var getCountREF = database.ref("playerCount").on("value",function(data){

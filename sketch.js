@@ -1,17 +1,25 @@
 var database;
+var form, player, game;
+var player1,player2,player3,player4;
+var obs1,obs2,obs3,obs4;
+var index,x,y;
+var init_pos, i;
+var scoreboard1, scoreboard2, scoreboard3, scoreboard4;
+var player_index, rank;
+
 var gameState = 0;
 var playerCount = 0;
-var form, player, game;
-var allPlayers = [];
-var player1,player2,player3,player4;
-var players = [];
-var index,x,y;
+var posx = 1700;
+var posy = 210;
+
 var shouldMove = true;
 var jumped = false;
+var inAir = false;
 var initialized = false;
-var init_pos;
-var obs1,obs2,obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs13,obs14,obs15,obs16;
+
 var obs = [];
+var players = [];
+var allPlayers = [];
 
 function setup(){
   createCanvas(displayWidth - 20, displayHeight - 155);

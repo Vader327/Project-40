@@ -67,6 +67,11 @@ canvas{
   -webkit-animation: fadein 6s;
 }
 
+#scoreboard{
+  font-family: "Duru Sans";
+  font-size: 15px;
+}
+
 @-webkit-keyframes Gradient{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}

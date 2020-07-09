@@ -6,7 +6,7 @@ class Form{
         this.title.elt.id = "title";
 
         this.input = createInput();
-        this.input.elt.placeholder = ("Enter Username");
+        this.input.elt.placeholder = "Enter Username";
         this.input.position(displayWidth/2 - 170, displayHeight/2 - 120);
         this.input.elt.id = "name_input";
         
@@ -38,13 +38,13 @@ class Form{
         this.submit.mousePressed(()=>{
             playerCount+=1;
             player.index = playerCount;
+            player.name = this.input.value();
             player.update();
             player.updateCount(playerCount);
             
             this.input.hide();
             this.submit.hide();
 
-            player.name = this.input.value();
             this.title.position(displayWidth/2 - 140, 0);
             this.title.style("font-size","30px");
 
