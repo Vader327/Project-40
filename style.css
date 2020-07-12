@@ -20,6 +20,16 @@ canvas{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+#title_small{
+  font-family: 'Duru Sans';
+  font-weight: 900; 
+  font-size: 30px;
+  background: linear-gradient(270deg, #ff9c1c, #44e994, #41e3ff);
+  background-size: 800% 800%;
+  -webkit-animation: Gradient 10s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 #name_input{
   border-radius: 35px;
@@ -70,6 +80,35 @@ canvas{
 #scoreboard{
   font-family: "Duru Sans";
   font-size: 15px;
+}
+
+#over{
+  color: orange;
+  font-family: 'Quicksand';
+  font-weight: 900;
+  font-size: 60px;
+}
+
+#restart{
+	width: 4cm;
+	height: 1cm;
+	border: none;
+	border-radius:2em;
+	font-family:'Quicksand';
+	font-weight:300;
+	font-size: 25px;
+	color:#FFFFFF;
+	background-color:#4eb5f1;
+	text-align:center;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+	outline: none;
+}
+#restart:hover {
+	background-color: rgb(77, 212, 65);
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	transition: all 0.5s ease-in-out;
 }
 
 @-webkit-keyframes Gradient{

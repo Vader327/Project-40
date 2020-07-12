@@ -14,8 +14,9 @@ class Form{
         this.submit.position(this.input.x + 100, this.input.y + 100);
         this.submit.elt.id = "submit";
 
-        this.reset = createButton("Reset");
-        this.reset.position(displayWidth - 100, 20);
+        this.resetButton = createButton("Reset");
+        this.resetButton.position(displayWidth - 100, 20);
+        //this.resetButton.hide();
 
         this.greeting = createElement("h2");
         this.greeting.position(displayWidth/2 - 110, displayHeight/4);
@@ -34,6 +35,13 @@ class Form{
         this.greeting.hide();
         this.info.hide();
     }
+    destroy(){
+        this.title.remove();
+        this.input.remove();
+        this.submit.remove();
+        this.greeting.remove();
+        this.info.remove();
+    }
     display(){
         this.submit.mousePressed(()=>{
             playerCount+=1;
@@ -45,15 +53,15 @@ class Form{
             this.input.hide();
             this.submit.hide();
 
-            this.title.position(displayWidth/2 - 140, 0);
-            this.title.style("font-size","30px");
+            this.title.position(displayWidth/2 - 140, -10);
+            this.title.elt.id = "title_small";
 
             this.greeting.html("Hello " + player.name + "!");
             this.greeting.show();
             this.info.show();
         })
 
-        this.reset.mousePressed(()=>{
+        this.resetButton.mousePressed(()=>{
             game.update(0);
             player.updateCount(0);
             database.ref("Players").remove();

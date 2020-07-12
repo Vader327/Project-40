@@ -23,17 +23,56 @@ class Game{
             form.display();
         }
 
+        shouldMove = true;
+        overPos = null;
+
         player1 = createSprite(100,100,30,30);
+        player1.addAnimation("animation1", running1);
+        player1.addAnimation("over1", stop1);
+        player1.scale = 0.2;
+        player1.setCollider("rectangle",0,0,200,280);
+
         player2 = createSprite(100,200,30,30);
+        player2.addAnimation("animation2", running2);
+        player2.addAnimation("over2", stop2);
+        player2.scale = 0.3;
+        player2.setCollider("rectangle",0,0,120,180);
+
         player3 = createSprite(100,300,30,30);
+        player3.addAnimation("animation3", running3);
+        player3.addAnimation("over3", stop3);
+        player3.scale = 0.2;
+        player3.setCollider("rectangle",0,0,200,280);
+
         player4 = createSprite(100,400,30,30);
+        player4.addAnimation("animation4", running4);
+        player4.addAnimation("over4", stop4);
+        player4.scale = 0.2;
+        player4.setCollider("rectangle",0,0,200,280);
+
         players = [player1,player2,player3,player4];
 
         for(var i = 1700; i < 5300; i += 300){
-            obs1 = createSprite(i,210,10,50);
-            obs2 = createSprite(i,330,10,50);
-            obs3 = createSprite(i,450,10,50);
-            obs4 = createSprite(i,570,10,50);
+            obs1 = createSprite(i,200,10,50);
+            obs1.addImage("hurdle", hurdleIMG);
+            obs1.scale = 0.2;
+            obs1.setCollider("rectangle",120,20,30,310);
+
+            obs2 = createSprite(i,340,10,50);
+            obs2.addImage("hurdle", hurdleIMG);
+            obs2.scale = 0.2;
+            obs2.setCollider("rectangle",120,20,30,310);
+
+            obs3 = createSprite(i,480,10,50);
+            obs3.addImage("hurdle", hurdleIMG);
+            obs3.scale = 0.2;
+            obs3.setCollider("rectangle",120,20,30,310);
+
+            obs4 = createSprite(i,620,10,50);
+            obs4.addImage("hurdle", hurdleIMG);
+            obs4.scale = 0.2;
+            obs4.setCollider("rectangle",120,20,30,310);
+
             obs.push(obs1,obs2,obs3,obs4);
         }
 
@@ -49,10 +88,27 @@ class Game{
         scoreboard2.elt.id = "scoreboard";
         scoreboard3.elt.id = "scoreboard";
         scoreboard4.elt.id = "scoreboard";
-        scoreboard1.style("color","rgb(0, 150, 196)");
-        scoreboard2.style("color","rgb(0, 150, 196)");
-        scoreboard3.style("color","rgb(0, 150, 196)");
-        scoreboard4.style("color","rgb(0, 150, 196)");
+        scoreboard1.style("color","#41e3ff");
+        scoreboard2.style("color","#41e3ff");
+        scoreboard3.style("color","#41e3ff");
+        scoreboard4.style("color","#41e3ff");
+
+        over = createElement("h3");
+        over.elt.id = "over";
+        over.position(displayWidth/2 - 150, displayHeight/2 - 300);
+        over.html("Game Over!");
+        over.hide();
+
+        rankText = createElement("p");
+        rankText.elt.id = "over";
+        rankText.position(displayWidth/2 - 40, displayHeight/2 - 170);
+        rankText.style("font-size", "25px");
+        rankText.hide();
+
+        restart = createButton("Play Again");
+        restart.elt.id = "restart";
+        restart.position(over.x + 80, over.y + 200);
+        restart.hide();
     }
 
     play(){
@@ -66,14 +122,16 @@ class Game{
         player.getPlayersAtEnd();
 
         if(allPlayers != undefined && gameState === 1){
+            image(bg, 0, 70, displayWidth*5, displayHeight - 150);
+
             index = 0;
             x = 0;
-            y = 100;
+            y = 60;
 
             for(player_index in allPlayers){
                 index+=1;
                 x = displayWidth + allPlayers[player_index].distance;
-                y += 120;
+                y += 140;
                 
                 if(player_index === "player1"){
                     scoreboard1.html(allPlayers[player_index].name + ": " + allPlayers[player_index].distance);
@@ -96,27 +154,40 @@ class Game{
                         init_pos = players[index - 1].y
                         initialized = true;
                     }
-
-                    players[index - 1].shapeColor = "red";
+                    fill("red");
+                    ellipse(x, players[index - 1].y, 40, 40);
                     camera.position.x = players[index - 1].x;
                     camera.position.y = displayHeight/2;
 
                     if(player_index === "player1"){
-                        scoreboard1.style("color","red");
+                        scoreboard1.style("color","#ff9c1c");
+                        if(shouldMove === false){
+                            players[index - 1].changeAnimation("over1", stop1);
+                        }
                     }
                     if(player_index === "player2"){
-                        scoreboard2.style("color","red");
+                        scoreboard2.style("color","#ff9c1c");
+                        if(shouldMove === false){
+                            players[index - 1].changeAnimation("over2", stop2);
+                        }
                     }
                     if(player_index === "player3"){
-                        scoreboard3.style("color","red");
+                        scoreboard3.style("color","#ff9c1c");
+                        if(shouldMove === false){
+                            players[index - 1].changeAnimation("over3", stop3);
+                        }
                     }
                     if(player_index === "player4"){
-                        scoreboard4.style("color","red");
+                        scoreboard4.style("color","#ff9c1c");
+                        if(shouldMove === false){
+                            players[index - 1].changeAnimation("over4", stop4);
+                        }
                     }
 
                     for(i of obs){
                         if(players[index - 1].isTouching(i)){
                             shouldMove = false;
+                            overPos = players[index - 1].x + 15;
                         }
                     }
 
@@ -153,19 +224,82 @@ class Game{
             shouldMove = false;
             player.rank += 1;
             Player.updatePlayersAtEnd(player.rank);
-
             rank = player.rank;
-
-        }
-        if(player.distance === 3861){
-            text("You Won!", 5500, 350);
-            text("Rank: " + rank, 5525, 450);
+            overPos = 5230;
         }
 
         if(shouldMove === false){
-            console.log("Game Over!");
+            if(player.distance < 3850){
+                over.show();
+                restart.show();
+            }
+            if(player.distance > 3850){
+                over.position(displayWidth/2 - 130, displayHeight/2 - 300);
+                over.html("You Won!");
+                rankText.html("Rank: " + rank);
+
+                over.show();
+                rankText.show();
+                restart.show();
+            }
         }
 
+        restart.mousePressed(()=>{
+            clear();
+            gameState = 0;
+            player.distance = 0;
+
+            over.remove();
+            rankText.remove();
+            restart.remove();
+            scoreboard1.remove();
+            scoreboard2.remove();
+            scoreboard3.remove();
+            scoreboard4.remove();
+
+            form.title.position(displayWidth/2 - 290, 0);
+            form.title.elt.id = "title";
+            form.destroy();
+
+            playerCount-=1;
+            player.updateCount(playerCount);
+            console.log(allPlayers);
+
+            player1.destroy();
+            player2.destroy();
+            player3.destroy();
+            player4.destroy();
+
+            for(i of obs){
+                i.destroy();
+            }
+            obs = [];
+
+            if(playerCount === 0){
+                game.update(0);
+                allPlayers = [];
+                Player.updatePlayersAtEnd(0);
+                //database.ref("Players/player" + player.index).remove();
+                database.ref("Players").remove();
+            }
+
+            index = 0;
+            x = 0;
+            y = 60;
+            init_pos = null;
+            initialized = false;
+
+            game.start();
+        })
+
         drawSprites();
+
+        if(overPos !== null){
+            stroke("orange");
+            strokeWeight(5);
+            fill("#4eb5f1");
+            rectMode(CENTER);
+            rect(overPos, (displayHeight/2 - 70), 400, 250, 2);
+        }
     }
 }
